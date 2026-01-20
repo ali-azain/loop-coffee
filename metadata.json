@@ -1,0 +1,7 @@
+{
+  "name": "Loop Coffee Official Website",
+  "description": "A cinematic, minimalist digital experience for Loop Coffee, founded by Irfan Junejo. Designed with brutalist luxury, extreme whitespace, and high-contrast aesthetics.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
