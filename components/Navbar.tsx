@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,6 @@ const Navbar: React.FC = () => {
     { label: 'ABOUT', href: '#about' },
     { label: 'MENU', href: '#menu' },
     { label: 'LOCATION', href: '#location' },
-    { label: 'ORDER', href: '#menu' },
   ];
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -24,73 +24,88 @@ const Navbar: React.FC = () => {
     <>
       {/* Desktop Corner Nav */}
       <nav className="hidden md:block">
-        <div className="fixed top-12 left-12 z-50">
-          <a 
+        <div className="fixed top-12 left-12 z-50 overflow-hidden">
+          <motion.a 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             href="#about" 
             onClick={(e) => handleScroll(e, '#about')}
-            className="font-mono text-sm tracking-widest hover:text-[#FF0000] transition-colors duration-300"
+            className="block font-mono text-[10px] tracking-[0.3em] hover:text-[#FF0000] transition-colors duration-300"
           >
             ABOUT
-          </a>
+          </motion.a>
         </div>
-        <div className="fixed top-12 right-12 z-50">
-          <a 
+        <div className="fixed top-12 right-12 z-50 overflow-hidden">
+          <motion.a 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
             href="#menu" 
             onClick={(e) => handleScroll(e, '#menu')}
-            className="font-mono text-sm tracking-widest hover:text-[#FF0000] transition-colors duration-300"
+            className="block font-mono text-[10px] tracking-[0.3em] hover:text-[#FF0000] transition-colors duration-300 text-right"
           >
             MENU
-          </a>
+          </motion.a>
         </div>
-        <div className="fixed bottom-12 left-12 z-50">
-          <a 
+        <div className="fixed bottom-12 left-12 z-50 overflow-hidden">
+          <motion.a 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
             href="#location" 
             onClick={(e) => handleScroll(e, '#location')}
-            className="font-mono text-sm tracking-widest hover:text-[#FF0000] transition-colors duration-300"
+            className="block font-mono text-[10px] tracking-[0.3em] hover:text-[#FF0000] transition-colors duration-300"
           >
             LOCATION
-          </a>
+          </motion.a>
         </div>
-        <div className="fixed bottom-12 right-12 z-50">
-          <a 
-            href="#menu" 
-            onClick={(e) => handleScroll(e, '#menu')}
-            className="font-mono text-sm tracking-widest hover:text-[#FF0000] transition-colors duration-300"
-          >
-            ORDER
-          </a>
-        </div>
+        {/* Bottom Right intentionally left empty for balance/asymmetry as per cinematic minimalism */}
       </nav>
 
       {/* Mobile Hamburger */}
-      <div className="md:hidden fixed top-6 right-6 z-[60]">
+      <div className="md:hidden fixed top-8 right-8 z-[60]">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className="flex flex-col gap-2 w-8 focus:outline-none"
         >
-          <div className={`h-[2px] w-full bg-black transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2.5' : ''}`} />
-          <div className={`h-[2px] w-full bg-black transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
-          <div className={`h-[2px] w-full bg-black transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+          <motion.div 
+            animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+            className="h-[1px] w-full bg-black" 
+          />
+          <motion.div 
+            animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+            className="h-[1px] w-full bg-black" 
+          />
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`
-        md:hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-12
-        transition-transform duration-500 ease-in-out
-        ${isOpen ? 'translate-y-0' : '-translate-y-full'}
-      `}>
-        {navItems.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            onClick={(e) => handleScroll(e, item.href)}
-            className="font-inter font-black text-4xl tracking-tighter hover:text-[#FF0000]"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+            className="md:hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-8"
           >
-            {item.label}
-          </a>
-        ))}
-      </div>
+            {navItems.map((item, i) => (
+              <motion.a
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + (i * 0.1) }}
+                href={item.href}
+                onClick={(e) => handleScroll(e, item.href)}
+                className="font-inter font-black text-5xl tracking-tighter hover:text-[#FF0000]"
+              >
+                {item.label}
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

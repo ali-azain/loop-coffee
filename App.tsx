@@ -1,5 +1,6 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Story from './components/Story';
@@ -8,64 +9,71 @@ import Location from './components/Location';
 import Footer from './components/Footer';
 
 function App() {
-  // Smooth scroll implementation
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
-        e.preventDefault();
-        const id = target.getAttribute('href')?.substring(1);
-        const element = document.getElementById(id || '');
-        if (element) {
-          window.scrollTo({
-            top: element.offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      }
-    };
-
-    window.addEventListener('click', handleAnchorClick);
-    return () => window.removeEventListener('click', handleAnchorClick);
-  }, []);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation Layer */}
+    <div className="min-h-screen bg-white selection:bg-[#FF0000] selection:text-white">
+      {/* Cinematic Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#FF0000] z-[100] origin-left"
+        style={{ scaleX }}
+      />
+
       <Navbar />
 
-      {/* Hero Section */}
-      <Hero />
+      <main>
+        <Hero />
 
-      {/* Narrative Section */}
-      <Story />
+        <Story />
 
-      {/* Cinematic Break (Full-width Image) */}
-      <div className="px-[5vw] md:px-[15vw]">
-        <img 
-          src="https://picsum.photos/seed/loopcoffee2/1600/900" 
-          alt="Coffee roasting process" 
-          className="w-full cinematic-img grayscale"
-        />
-      </div>
+        {/* Cinematic Break Visual */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5 }}
+          className="px-[5vw] md:px-[15vw] mb-[200px]"
+        >
+          <div className="relative aspect-[21/9] overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop" 
+              alt="Cinematic coffee scene" 
+              className="w-full h-full object-cover grayscale contrast-125 brightness-90 transition-transform duration-[20s] hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+          </div>
+        </motion.div>
 
-      {/* Menu Section */}
-      <Menu />
+        <Menu />
 
-      {/* Location Section */}
-      <Location />
+        <Location />
 
-      {/* Final Brand Imprint (Red Line) */}
-      <div className="px-[5vw] md:px-[15vw] py-12">
-        <div className="h-[1px] w-full bg-[#FF0000]" />
-      </div>
+        {/* Bottom Red Line Anchor */}
+        <div className="px-[5vw] md:px-[15vw] py-24">
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: '100%' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="h-[1px] bg-[#FF0000]" 
+          />
+        </div>
+      </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Global Scroll Indicator (Red Light style) */}
-      <div className="fixed bottom-12 right-12 z-[100] md:hidden">
-        <div className="w-3 h-3 rounded-full bg-[#FF0000] animate-pulse" />
+      {/* Global Scroll Indicator (Pulse Dot) */}
+      <div className="fixed bottom-12 right-12 z-[100] pointer-events-none">
+        <motion.div 
+          animate={{ opacity: [0.2, 1, 0.2] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-2 h-2 rounded-full bg-[#FF0000]" 
+        />
       </div>
     </div>
   );

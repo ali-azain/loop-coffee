@@ -1,49 +1,72 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import Section from './Section';
 import { MENU_DATA } from '../constants';
 
 const Menu: React.FC = () => {
   return (
     <Section id="menu" className="bg-white">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-inter font-black text-6xl md:text-8xl tracking-tighter mb-24 md:mb-32">
-          MENU
-        </h2>
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="mb-32 md:mb-48"
+        >
+          <h2 className="font-inter font-black text-7xl md:text-9xl tracking-tighter leading-none mb-4">
+            MENU
+          </h2>
+          <div className="w-24 h-[1px] bg-[#FF0000]" />
+        </motion.div>
 
-        <div className="space-y-24 md:space-y-32">
-          {MENU_DATA.map((category) => (
-            <div key={category.title} className="group">
-              <h3 className="font-mono text-sm tracking-widest text-[#FF0000] mb-8 border-b border-black/10 pb-2">
-                {category.title.toUpperCase()}
+        <div className="space-y-32 md:space-y-48">
+          {MENU_DATA.map((category, catIdx) => (
+            <motion.div 
+              key={category.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: catIdx * 0.1, duration: 0.8 }}
+              className="group"
+            >
+              <h3 className="font-mono text-[10px] tracking-[0.5em] text-[#FF0000] mb-12 uppercase flex items-center gap-4">
+                <span>{category.title}</span>
+                <span className="flex-1 h-[1px] bg-black/5" />
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6">
-                {category.items.map((item) => (
+              <div className="flex flex-col gap-8 md:gap-12">
+                {category.items.map((item, itemIdx) => (
                   <div 
                     key={item.name} 
-                    className="flex justify-between items-end group/item cursor-default"
+                    className="flex flex-col group/item cursor-default"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#FF0000] opacity-0 group-hover/item:opacity-100 transition-opacity duration-200" />
-                      <span className="font-inter font-bold text-lg md:text-xl tracking-tight leading-none">
-                        {item.name}
+                    <div className="flex justify-between items-baseline">
+                      <div className="flex items-center gap-4">
+                        <span className="font-mono text-[10px] text-black/20 group-hover/item:text-[#FF0000] transition-colors">
+                          {(itemIdx + 1).toString().padStart(2, '0')}
+                        </span>
+                        <span className="font-inter font-bold text-2xl md:text-3xl tracking-tight">
+                          {item.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-sm font-medium tracking-tight">
+                        {item.price}
                       </span>
                     </div>
-                    <div className="flex-1 border-b border-dotted border-black/20 mx-4 mb-1" />
-                    <span className="font-mono text-sm text-black/60">
-                      {item.price}
-                    </span>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-24 pt-12 border-t border-black/5">
-          <p className="font-mono text-xs text-black/40 text-center uppercase tracking-widest">
-            All prices are inclusive of taxes. Loop Coffee DHA.
+        <div className="mt-48 py-12 border-t border-black/5">
+          <p className="font-mono text-[9px] text-black/30 text-center uppercase tracking-[0.4em] leading-relaxed">
+            Specialty grade beans. <br />
+            Handcrafted in small batches. <br />
+            Loop Coffee Official Archive.
           </p>
         </div>
       </div>
