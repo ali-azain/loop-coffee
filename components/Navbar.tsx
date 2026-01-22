@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from '../assets/logo.png';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
             onClick={(e) => handleScroll(e, '#hero')}
             className="block hover:opacity-50 transition-opacity duration-300"
           >
-            <img src="/logo.png" alt="Loop" className="h-8 w-auto" />
+            <img src={logo} alt="Loop" className="h-8 w-auto" />
           </motion.a>
         </div>
 
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
               transition={{ delay: 0.4 }}
               className="absolute top-8 left-8"
             >
-              <img src="/logo.png" alt="Loop" className="h-6 w-auto mix-blend-multiply opacity-50" />
+              <img src={logo} alt="Loop" className="h-6 w-auto mix-blend-multiply opacity-50" />
             </motion.div>
 
             <div className="flex flex-col gap-8 text-center">
