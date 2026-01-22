@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../assets/logo.png';
 
 interface IntroOverlayProps {
     onComplete?: () => void;
@@ -67,7 +66,7 @@ const IntroOverlay: React.FC<IntroOverlayProps> = ({ onComplete }) => {
                 >
                     {/* White Logo for Black Background */}
                     <motion.img
-                        src={logo}
+                        src={`${import.meta.env.BASE_URL}logo.png`}
                         className="w-full h-auto invert"
                         animate={{ opacity: 0 }}
                         transition={{ duration: 0.5, delay: 2.2 }} // Fade out before split

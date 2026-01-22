@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { INFINITY_SVG } from '../constants';
-import logo from '../assets/logo.png';
 
 const Hero: React.FC = () => {
   return (
@@ -14,7 +13,7 @@ const Hero: React.FC = () => {
         className="w-32 md:w-48 z-20"
       >
         <img
-          src={logo}
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="Loop Coffee Logo"
           className="w-full h-auto object-contain mix-blend-multiply"
         />

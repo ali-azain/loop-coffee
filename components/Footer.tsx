@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="px-[5vw] md:px-[15vw] py-12 md:py-24 bg-white border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
       <div className="flex items-center gap-4">
-        <img src="/logo.png" alt="Loop Coffee" className="h-8 w-auto invert" />
+        <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Loop Coffee" className="h-8 w-auto invert" />
         <div className="w-[1px] h-6 bg-black/20" />
         <span className="font-mono text-[10px] tracking-widest text-black/40">© 2026 OFFICIAL WEBSITE</span>
       </div>
