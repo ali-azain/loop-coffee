@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
         <img
           src="/logo.png"
           alt="Loop Coffee Logo"
-          className="w-full h-auto object-contain invert mix-blend-multiply"
+          className="w-full h-auto object-contain mix-blend-multiply"
         />
       </motion.div>
 

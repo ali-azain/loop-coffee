@@ -60,6 +60,20 @@ const Navbar: React.FC = () => {
             LOCATION
           </motion.a>
         </div>
+        {/* Desktop Center Logo */}
+        <div className="hidden md:block fixed top-12 left-1/2 -translate-x-1/2 z-50 overflow-hidden mix-blend-multiply">
+          <motion.a
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            href="#"
+            onClick={(e) => handleScroll(e, '#hero')}
+            className="block hover:opacity-50 transition-opacity duration-300"
+          >
+            <img src="/logo.png" alt="Loop" className="h-8 w-auto" />
+          </motion.a>
+        </div>
+
         {/* Bottom Right intentionally left empty for balance/asymmetry as per cinematic minimalism */}
       </nav>
 
