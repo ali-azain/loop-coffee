@@ -7,17 +7,21 @@ const Hero: React.FC = () => {
   return (
     <section id="hero" className="h-screen w-full flex flex-col items-center justify-center relative bg-white overflow-hidden">
       {/* Centered Infinity Logo with Entrance Animation */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
         animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="w-24 md:w-32 text-black z-20"
+        className="w-32 md:w-48 z-20"
       >
-        {INFINITY_SVG}
+        <img
+          src="/logo.png"
+          alt="Loop Coffee Logo"
+          className="w-full h-auto object-contain invert mix-blend-multiply"
+        />
       </motion.div>
 
       {/* Cinematic Red Line Animation - Drawing through the screen */}
-      <motion.div 
+      <motion.div
         initial={{ width: 0 }}
         animate={{ width: '100%' }}
         transition={{ delay: 1, duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
@@ -25,17 +29,17 @@ const Hero: React.FC = () => {
       />
 
       {/* Floating View Menu CTA */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-[15vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-6"
+        className="absolute bottom-[20vh] md:bottom-[15vh] left-1/2 -translate-x-1/2 w-full flex justify-center px-6"
       >
-        <a 
+        <a
           href="#menu"
-          className="group relative flex items-center justify-center px-12 py-4 overflow-hidden"
+          className="group relative flex items-center justify-center px-8 py-4 md:px-12 w-[80vw] md:w-auto overflow-hidden bg-white/50 backdrop-blur-sm md:bg-transparent"
         >
-          <span className="relative z-10 font-mono text-[10px] tracking-[0.4em] text-black group-hover:text-white transition-colors duration-500 uppercase">
+          <span className="relative z-10 font-mono text-[10px] tracking-[0.4em] text-black group-hover:text-white transition-colors duration-500 uppercase whitespace-nowrap">
             EXPLORE THE MENU
           </span>
           <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.76, 0, 0.24, 1]" />
@@ -45,13 +49,13 @@ const Hero: React.FC = () => {
 
       {/* Bottom Technical Label */}
       <div className="absolute bottom-12 overflow-hidden">
-        <motion.h1 
+        <motion.h1
           initial={{ y: '100%' }}
           animate={{ y: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}
           className="font-mono font-medium text-[9px] tracking-[0.8em] text-black/30 uppercase text-center"
         >
-          DHA PHASE VI — EST 2026
+          DHA PHASE 8 — EST 2026
         </motion.h1>
       </div>
     </section>

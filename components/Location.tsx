@@ -16,8 +16,8 @@ const Location: React.FC = () => {
             <div className="space-y-2">
               <h3 className="font-mono text-xs tracking-widest text-[#FF0000] uppercase">Address</h3>
               <p className="font-inter font-bold text-xl md:text-2xl tracking-tight">
-                Plot 12C, Lane 4, <br />
-                DHA Phase VI, Karachi
+                Ground Floor, 3C, 10 Zulfiqar St 1,<br />
+                DHA Phase 8, Karachi
               </p>
             </div>
 
@@ -25,14 +25,21 @@ const Location: React.FC = () => {
               <h3 className="font-mono text-xs tracking-widest text-[#FF0000] uppercase">Operating Hours</h3>
               <p className="font-inter font-bold text-xl md:text-2xl tracking-tight">
                 Mon - Sun <br />
-                08:00 - 00:00
+                08:00 - 23:00
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="font-mono text-xs tracking-widest text-[#FF0000] uppercase">Contact</h3>
+              <p className="font-inter font-bold text-xl md:text-2xl tracking-tight">
+                +92 307 1115667
               </p>
             </div>
 
             <div className="pt-8">
-              <a 
-                href="https://www.google.com/maps" 
-                target="_blank" 
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Loop+Coffee+Co.+Phase+8+Karachi"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-4 group"
               >
@@ -48,8 +55,8 @@ const Location: React.FC = () => {
 
           {/* Map Block */}
           <div className="lg:col-span-8 order-1 lg:order-2 h-[400px] md:h-[600px] relative">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.134707629535!2d67.0658705!3d24.825126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d905953006d%3A0x608e925925055b40!2sDHA%20Phase%206%20Karachi!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.3879207062456!2d67.073427!3d24.782046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d262d5f5a89%3A0x7d06d4d12345678!2sDHA%20Phase%208%20Karachi!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
               className="w-full h-full grayscale-map border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
